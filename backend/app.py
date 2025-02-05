@@ -18,22 +18,25 @@ def home():
 
 @app.route('/predict', methods=['POST'])
 def predict():
-   
     symptoms = request.form.getlist('symptoms')
     
+    # Create an input vector for the model
     input_vector = np.zeros(len(SYMPTOM_COLUMNS))
     for symptom in symptoms:
         if symptom in SYMPTOM_COLUMNS:
             input_vector[SYMPTOM_COLUMNS.index(symptom)] = 1
 
+    # Scale the input vector
     input_vector = input_vector.reshape(1, -1)
     input_vector_scaled = scaler.transform(input_vector)
 
+    # Predict the class and decode the label
     predicted_class = model.predict(input_vector_scaled)
+    predicted_label = label_encoder.inverse_transform(predicted_class)[0]
 
-    predicted_label = label_encoder.inverse_transform(predicted_class)
+    # Render the prediction result page
+    return render_template('predict.html', predicted_label=predicted_label)
 
-    return f"Predicted Disease: {predicted_label[0]} <br><a href='/'>Go back</a>"
 
 if __name__ == '__main__':
     app.run(debug=True)

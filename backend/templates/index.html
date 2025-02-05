@@ -1,19 +1,141 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Disease Prediction</title>
+    <style>
+        /* General Reset */
+        body, h1, h3, p, ul, li, form, div {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: start;
+            overflow-y: auto; /* Allow scrolling only vertically */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 100%;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            min-height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .title {
+            font-size: 2rem;
+            font-weight: 600;
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 1rem;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .symptoms-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 1rem 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .symptom-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .symptom-item:hover {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+        }
+
+        .checkbox {
+            margin-right: 8px;
+            transform: scale(1.2);
+        }
+
+        .checkbox:checked {
+            accent-color: #4CAF50;
+        }
+
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 10px 15px;
+            font-size: 1rem;
+            color: #fff;
+            background: #4CAF50;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #43a047;
+            box-shadow: 0 4px 15px rgba(67, 160, 71, 0.3);
+        }
+
+        .form-card {
+            padding: 20px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #e8f5e9, #fff);
+            border: 1px solid #ddd;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            flex-grow: 1; /* Allows it to expand if needed */
+        }
+    </style>
 </head>
 <body>
-    <h1>Disease Prediction</h1>
-    <form action="/predict" method="post">
-        <h3>Select your symptoms:</h3>
-        {% for symptom in symptoms %}
-            <label>
-                <input type="checkbox" name="symptoms" value="{{ symptom }}">
-                {{ symptom }}
-            </label><br>
-        {% endfor %}
-        <button type="submit">Predict</button>
-    </form>
+    <div class="container">
+        <div class="form-card">
+            <h1 class="title">Disease Prediction</h1>
+            <form action="/predict" method="post">
+                <h3 class="subtitle">Select your symptoms:</h3>
+                <div class="symptoms-list">
+                    {% for symptom in symptoms %}
+                        <label class="symptom-item">
+                            <input 
+                                type="checkbox" 
+                                name="symptoms" 
+                                value="{{ symptom }}" 
+                                class="checkbox">
+                            <span>{{ symptom }}</span>
+                        </label>
+                    {% endfor %}
+                </div>
+                <button type="submit" class="submit-btn">Predict</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>
