@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Disease Prediction</title>
+</head>
+<body>
+    <h1>Disease Prediction</h1>
+    <form action="/predict" method="post">
+        <h3>Select your symptoms:</h3>
+        {% for symptom in symptoms %}
+            <label>
+                <input type="checkbox" name="symptoms" value="{{ symptom }}">
+                {{ symptom }}
+            </label><br>
+        {% endfor %}
+        <button type="submit">Predict</button>
+    </form>
+</body>
+</html>
