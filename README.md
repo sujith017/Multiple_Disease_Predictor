@@ -9,3 +9,10 @@
 </ul>
 
 -------------------------------------------------------------------------------------------------------------------------
+#  Signs and symptoms Selection Page
+![First Page Preview Image](./Preview/Disease_Prediction.png)
+
+
+# Result Page
+
+![First Page Preview Image](./Preview/Prediction_Result.png)
